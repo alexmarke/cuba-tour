@@ -11,11 +11,6 @@ class SEOPress_Integration extends Integration {
 	 */
 	protected $id = 'seopress';
 
-	public function __construct() {
-		$this->name = __( 'SEOPress', 'simply-static' );
-		$this->description = __( 'Adds sitemaps to generated static files.', 'simply-static' );
-	}
-
 	/**
 	 * Run the integration.
 	 *
@@ -23,7 +18,6 @@ class SEOPress_Integration extends Integration {
 	 */
 	public function run() {
 		add_action( 'ss_after_setup_task', [ $this, 'register_sitemap_pages' ] );
-		add_filter( 'ssp_single_export_additional_urls', [ $this, 'add_sitemap_url' ] );
 	}
 
 	/**
@@ -54,23 +48,11 @@ class SEOPress_Integration extends Integration {
 	}
 
 	/**
-	 * Add XML sitemap to single exports.
+	 * Can this integration run?
 	 *
-	 * @param $urls
-	 *
-	 * @return mixed
+	 * @return bool
 	 */
-	public function add_sitemap_url( $urls ) {
-		$urls[] = home_url( 'sitemaps.xml' );
-		return $urls;
-	}
-
-	/**
-	 * Return if the dependency is active.
-	 *
-	 * @return boolean
-	 */
-	public function dependency_active() {
+	public function can_run() {
 		return defined( 'SEOPRESS_VERSION' );
 	}
 }

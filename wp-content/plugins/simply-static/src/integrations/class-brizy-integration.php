@@ -11,10 +11,6 @@ class Brizy_Integration extends Integration {
      */
     protected $id = 'brizy';
 
-	public function __construct() {
-		$this->name = __( 'Brizy', 'simply-static' );
-		$this->description = __( 'Makes sure images optimized by Brizy are exported as well.', 'simply-static' );
-	}
 
     /**
      * Run the integration.
@@ -81,12 +77,7 @@ class Brizy_Integration extends Integration {
         return true;
     }
 
-	/**
-	 * Return if the dependency is active.
-	 *
-	 * @return boolean
-	 */
-	public function dependency_active() {
+    public function can_run() {
         return defined( 'BRIZY_VERSION' );
     }
 }
